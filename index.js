@@ -124,7 +124,7 @@ I'm an HMTD Official File Store Bot Maintained by @HMTD_Links. I will Store File
 
 //=================================Handling inline keyboard functions=================================//
 
-bot.hears("👤 Manage admins", async (ctx) => {
+bot.hears("👤 Manage Admins", async (ctx) => {
   if (ctx.from.id == process.env.ADMIN) {
     await db.getAdmin().then((res) => {
       if (res.length < 1) {
