@@ -86,10 +86,12 @@ I'm an HMTD Official File Store Bot Maintained by @HMTD_Links. I will Store File
                 caption: res.caption,
                 parse_mode: "Markdown",
                 reply_markup: res.reply_markup ?? null,
-              });
+              ],
+                  },
+                }
+              );
             }
           });
-        }
       } else {
         //fetch data from db and insert channel link
         db.getBotAssets().then((res) => {
@@ -111,16 +113,12 @@ I'm an HMTD Official File Store Bot Maintained by @HMTD_Links. I will Store File
                     {
                       text: "♻ Joined",
                       callback_data: "Check Joined",
-                    },
-                  ],
-                ],
-              },
+                    ],
+                  },
+                }
+              );
             }
-          );
-        });
-      }
-    });
-});
+          });
 
 //=================================Handling inline keyboard functions=================================//
 
@@ -154,10 +152,11 @@ bot.hears("👤 Manage Admins", async (ctx) => {
               [{ text: "🆕 Add Admin", callback_data: "ADD_ADMIN" }],
               [{ text: "🗑 Remove Admin", callback_data: "REMOVE_ADMIN" }],
             ],
-          },
-        });
-      }
-    });
+                  },
+                }
+              );
+            }
+          });
   } else {
     ctx.reply("☢ Authorization failed");
   }
@@ -175,9 +174,12 @@ bot.hears("📊 Bot status", (ctx) => {
             `📊<b>Bot Subscribers</b>\n\n🧾<i>Total users</i>: ${
               user.length ?? ""
             }\n📁 <i>Total Files</i>: ${files.length ?? ""}`
-          );
-        });
-      });
+          ],
+                  },
+                }
+              );
+            }
+          });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -202,13 +204,12 @@ bot.hears("🗑 Delete Files", (ctx) => {
                   {
                     text: "➖ Remove Batch",
                     callback_data: "REMOVEBATCH_FILE",
+                  ],
                   },
-                ],
-              ],
-            },
-          }
-        );
-      });
+                }
+              );
+            }
+          });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -228,12 +229,11 @@ bot.hears("☢ Delete all", (ctx) => {
             inline_keyboard: [
               [{ text: "✔ Confirm", callback_data: "CONFIRMREMOVEALLFILES" }],
             ],
-          },
-        }
-      );
-    }
-  });
-});
+                  },
+                }
+              );
+            }
+          });
 
 //ban users
 const banUserQuestion = new TelegrafStatelessQuestion(
@@ -254,7 +254,12 @@ const banUserQuestion = new TelegrafStatelessQuestion(
               ])
                 .oneTime()
                 .resize()
-            );
+            ],
+                  },
+                }
+              );
+            }
+          });
           } else {
             return await ctx.replyWithHTML(
               `✔ <b>Something went wrong</b>`,
@@ -285,7 +290,12 @@ bot.hears("🛑 Ban", (ctx) => {
       return banUserQuestion.replyWithHTML(
         ctx,
         `🆔<i> Enter user id of user to be banned</i>`
-      );
+      ],
+                  },
+                }
+              );
+            }
+          });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -324,9 +334,12 @@ const unBanUserQuestion = new TelegrafStatelessQuestion(
               ])
                 .oneTime()
                 .resize()
-            );
-          }
-        });
+            ],
+                  },
+                }
+              );
+            }
+          });
       } else {
         ctx.reply("☢ Authorization failed");
       }
@@ -343,7 +356,12 @@ bot.hears("♻ Unban", (ctx) => {
       return banUserQuestion.replyWithHTML(
         ctx,
         `🆔<i> Enter user id of user to be un banned</i>`
-      );
+      ],
+                  },
+                }
+              );
+            }
+          });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -364,10 +382,11 @@ bot.hears("💌 Broadcast", async (ctx) => {
               inline_keyboard: [
                 [{ text: "💌 Broadcast All", callback_data: "BROADCAST_ALL" }],
               ],
-            },
-          }
-        );
-      });
+                  },
+                }
+              );
+            }
+          });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -387,16 +406,15 @@ bot.hears("⚙ Config bot", (ctx) => {
             {
               text: "🔖 EDIT CHANNEL LINK",
               callback_data: "EDITJOINCHANNELLINK",
-            },
-          ],
-        ],
-      },
-    }
-  );
-});
+            ],
+                  },
+                }
+              );
+            }
+          });
 //=================================Callback datas=================================//
 
-//Adding new admins
+//Adding new Admins
 const addNewAdminQuestion = new TelegrafStatelessQuestion(
   "addNewAdmin",
   async (ctx) => {
@@ -430,10 +448,11 @@ const addNewAdminQuestion = new TelegrafStatelessQuestion(
               inline_keyboard: [
                 [{ text: "🆕 Add Admin", callback_data: "ADD_ADMIN" }],
               ],
-            },
+                  },
+                }
+              );
+            }
           });
-        }
-      });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -442,7 +461,7 @@ const addNewAdminQuestion = new TelegrafStatelessQuestion(
 
 bot.use(addNewAdminQuestion.middleware());
 
-//Removing admins
+//Removing Admins
 const removeAdminQuestion = new TelegrafStatelessQuestion(
   "removeAdmin",
   async (ctx) => {
@@ -472,10 +491,11 @@ const removeAdminQuestion = new TelegrafStatelessQuestion(
               inline_keyboard: [
                 [{ text: "🗑 Remove Admin", callback_data: "REMOVE_ADMIN" }],
               ],
-            },
+                  },
+                }
+              );
+            }
           });
-        }
-      });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -495,8 +515,12 @@ bot.action(/(.*)_ADMIN/g, (ctx) => {
       return removeAdminQuestion.replyWithHTML(
         ctx,
         `🆔 <i>Enter Id of the admin to be removed</i>`
-      );
-    }
+      ],
+                  },
+                }
+              );
+            }
+          });
   } else {
     ctx.reply("☢ Authorization failed");
   }
@@ -522,7 +546,12 @@ const removeOneFileQuestion = new TelegrafStatelessQuestion(
               ])
                 .oneTime()
                 .resize()
-            );
+            ],
+                  },
+                }
+              );
+            }
+          });
           } else {
             return await ctx.replyWithHTML(
               `❗ <i>Something went wrong make sure the entered shortid is correct</i>`,
@@ -535,9 +564,12 @@ const removeOneFileQuestion = new TelegrafStatelessQuestion(
               ])
                 .oneTime()
                 .resize()
-            );
-          }
-        });
+            ],
+                  },
+                }
+              );
+            }
+          });
       } else {
         ctx.reply("☢ Authorization failed");
       }
@@ -566,7 +598,12 @@ const removeBatchFileQuestion = new TelegrafStatelessQuestion(
               ])
                 .oneTime()
                 .resize()
-            );
+            ],
+                  },
+                }
+              );
+            }
+          });
           } else {
             return await ctx.replyWithHTML(
               `❗ <i>Something went wrong make sure the entered user id is correct</i>`,
@@ -579,9 +616,12 @@ const removeBatchFileQuestion = new TelegrafStatelessQuestion(
               ])
                 .oneTime()
                 .resize()
-            );
-          }
-        });
+            ],
+                  },
+                }
+              );
+            }
+          });
       } else {
         ctx.reply("☢ Authorization failed");
       }
@@ -628,7 +668,12 @@ bot.action("CONFIRMREMOVEALLFILES", (ctx) => {
             ])
               .oneTime()
               .resize()
-          );
+          ],
+                  },
+                }
+              );
+            }
+          });
         } else {
           return await ctx.replyWithHTML(
             `❗ <i>Something went wrong try again later</i>`,
@@ -672,7 +717,12 @@ const broadcastAllQuestion = new TelegrafStatelessQuestion(
                         reply_markup: post.reply_markup
                           ? post.reply_markup
                           : null,
-                      });
+                      ],
+                  },
+                }
+              );
+            }
+          });
                     } else if (post.type === "animation") {
                       await bot.telegram.sendAnimation(
                         user.userId,
@@ -683,8 +733,12 @@ const broadcastAllQuestion = new TelegrafStatelessQuestion(
                           reply_markup: post.reply_markup
                             ? post.reply_markup
                             : null,
-                        }
-                      );
+                        ],
+                  },
+                }
+              );
+            }
+          });
                     } else if (post.type === "video") {
                       await bot.telegram.sendVideo(user.userId, post.file_id, {
                         parse_mode: "HTML",
@@ -703,8 +757,12 @@ const broadcastAllQuestion = new TelegrafStatelessQuestion(
                           reply_markup: post.reply_markup
                             ? post.reply_markup
                             : null,
-                        }
-                      );
+                        ],
+                  },
+                }
+              );
+            }
+          });
                     } else if (post.type == "text") {
                       await bot.telegram.sendMessage(user.userId, post.text, {
                         parse_mode: "HTML",
@@ -729,8 +787,12 @@ const broadcastAllQuestion = new TelegrafStatelessQuestion(
                   ])
                     .oneTime()
                     .resize()
-                );
-              });
+                ],
+                  },
+                }
+              );
+            }
+          });
             } else {
               return await ctx.replyWithHTML(
                 `<i>No post found.Forward post from your post making bot and grab postID</i>`,
@@ -743,6 +805,9 @@ const broadcastAllQuestion = new TelegrafStatelessQuestion(
                 ])
                   .oneTime()
                   .resize()
+              ],
+                  },
+                }
               );
             }
           });
@@ -761,7 +826,12 @@ bot.action(/BROADCAST_ALL/g, (ctx) => {
       return broadcastAllQuestion.replyWithHTML(
         ctx,
         `🆔 Enter postID to be broadcasted to all`
-      );
+      ],
+                  },
+                }
+              );
+            }
+          });
     } else {
       ctx.reply("☢ Authorization failed");
     }
@@ -782,7 +852,12 @@ bot.action("EDITJOINCHANNELLINK", (ctx) => {
     return editjoinchannelQuestion.replyWithHTML(
       ctx,
       `✏ Enter new channel link`
-    );
+    ],
+                  },
+                }
+              );
+            }
+          });
   } else {
     ctx.reply("☢ Authorization failed");
   }
@@ -809,7 +884,12 @@ bot.action("CHECKJOINED", async (ctx) => {
               ])
                 .oneTime()
                 .resize()
-            );
+            ],
+                  },
+                }
+              );
+            }
+          });
           } else {
             ctx.reply(
               `<b>I will store files for you and generate sharable links</b>`,
@@ -819,11 +899,11 @@ bot.action("CHECKJOINED", async (ctx) => {
                   inline_keyboard: [
                     [{ text: "Search", switch_inline_query: "" }],
                   ],
-                },
-              }
-            );
-          }
-        });
+                  },
+                }
+              );
+            }
+          });
       } else {
         //fetch data from db and insert channel link
         db.getBotAssets().then((res) => {
@@ -845,16 +925,12 @@ bot.action("CHECKJOINED", async (ctx) => {
                     {
                       text: "♻ Joined",
                       callback_data: "Check Channel",
-                    },
-                  ],
-                ],
-              },
+                    ],
+                  },
+                }
+              );
             }
-          );
-        });
-      }
-    });
-});
+          });
 //=================================Saving files to database=================================//
 
 bot.on("message", async (ctx) => {
@@ -879,7 +955,12 @@ bot.on("message", async (ctx) => {
             ctx.message.reply_markup
               ? (post.reply_markup = ctx.message.reply_markup)
               : "";
-          }
+          ],
+                  },
+                }
+              );
+            }
+          });
         } else if (ctx.message.animation) {
           //if post is animation /gif
           post.type = "animation";
@@ -891,7 +972,12 @@ bot.on("message", async (ctx) => {
             ctx.message.reply_markup
               ? (post.reply_markup = ctx.message.reply_markup)
               : "";
-          }
+          ],
+                  },
+                }
+              );
+            }
+          });
         } else if (ctx.message.video) {
           //if post is video
           post.type = "video";
@@ -903,7 +989,12 @@ bot.on("message", async (ctx) => {
             ctx.message.reply_markup
               ? (post.reply_markup = ctx.message.reply_markup)
               : "";
-          }
+          ],
+                  },
+                }
+              );
+            }
+          });
         } else if (ctx.message.document) {
           post.type = "document";
           post.file_id = ctx.message.document.file_id;
@@ -914,7 +1005,12 @@ bot.on("message", async (ctx) => {
             ctx.message.reply_markup
               ? (post.reply_markup = ctx.message.reply_markup)
               : "";
-          }
+          ],
+                  },
+                }
+              );
+            }
+          });
         } else if (ctx.message.text) {
           post.type = "text";
           post.text = ctx.message.text;
@@ -932,11 +1028,20 @@ bot.on("message", async (ctx) => {
               if (r) {
                 ctx.reply(`<b>PostId:</b> <code>${r.id ?? 1}</code>`, {
                   parse_mode: "HTML",
-                });
+                ],
+                  },
+                }
+              );
+            }
+          });
               } else {
                 ctx.reply(`☣ Something went wrong`);
-              }
-            });
+              ],
+                  },
+                }
+              );
+            }
+          });
           } else {
             let lastid = parseInt(res[res.length - 1].id);
             post.id = lastid + 1;
@@ -944,17 +1049,28 @@ bot.on("message", async (ctx) => {
               if (r) {
                 ctx.reply(`<b>PostId:</b> <code>${post.id}</code>`, {
                   parse_mode: "HTML",
-                });
+                ],
+                  },
+                }
+              );
+            }
+          });
               } else {
                 ctx.reply(`☣ Something went wrong`);
-              }
-            });
-          }
-        });
+              ],
+                  },
+                }
+              );
+            }
+          });
       } else {
         ctx.reply("☢ Authorization failed");
-      }
-    });
+      ],
+                  },
+                }
+              );
+            }
+          });
   } else {
     //handling files
     let fileDetails = {
@@ -1044,7 +1160,7 @@ bot.on("message", async (ctx) => {
 
     //Sharing public link for saved files
     ctx.reply(
-      `https://t.me/${process.env.BOTUSERNAME}?start=${fileDetails.shortid}`
+      `https://telegram.me/${process.env.BOTUSERNAME}?start=${fileDetails.shortid}`
     );
   }
 });
