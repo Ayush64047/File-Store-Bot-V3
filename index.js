@@ -86,7 +86,7 @@ I'm an HMTD Official File Store Bot Maintained by @HMTD_Links. I will Store File
                 caption: res.caption,
                 parse_mode: "Markdown",
                 reply_markup: res.reply_markup ?? null,
-              ],
+              },
                   },
                 }
               );
